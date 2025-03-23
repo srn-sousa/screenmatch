@@ -20,15 +20,13 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		ConsumoApi consumoApi = new ConsumoApi();
-		var json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=ac51073f");
-//		out.println(json);
-//		json = consumoApi.obterDados("https://coffee.alexflipnote.dev/random.json");
+		//api-key: "ac51073f"
+		var json = new ConsumoApi().obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=ac51073f");
 		System.out.println(json);
 
-		ConverterDados conversor = new ConverterDados();
-		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-		out.println(dados);
+		//O JSON recebido na requisição foi convertido pela classe Mapper na Classe DadosSerie (Record)
+		DadosSerie dados = new ConverterDados().obterDados(json, DadosSerie.class);
+		System.out.println(dados);
 
 	}
 
